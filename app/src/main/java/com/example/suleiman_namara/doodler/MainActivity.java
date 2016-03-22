@@ -1,12 +1,14 @@
 package com.example.suleiman_namara.doodler;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.LinkAddress;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,27 +19,32 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.util.concurrent.ExecutionException;
 
+import static android.support.v4.view.ViewCompat.setLayerType;
+
 public class MainActivity extends Activity {
     DoodleView mdoodle, doodleid;
     LinearLayout mlayout;
-    Button clearbutton,redobutton,undobutton;
+    Button clearbutton,redobutton,undobutton,colorbutton;
+    CustomDailog colorpick;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         SeekBar mseek = (SeekBar)findViewById(R.id.seekBar);
          clearbutton = (Button)findViewById(R.id.clearbutton);
          redobutton = (Button)findViewById(R.id.redobutton);
          undobutton = (Button)findViewById(R.id.undobutton);
+        colorbutton = (Button)findViewById(R.id.colorbutton);
          doodleid = (DoodleView)findViewById(R.id.doodleview);
-
+        colorbutton.setBackgroundColor(Color.BLACK);
+        
         //Initiate Doodle class
         mdoodle = new DoodleView(MainActivity.this);
         //TO save Canvas drawing as Bitmap
@@ -67,9 +74,25 @@ public class MainActivity extends Activity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(MainActivity.this, "Seek bar changed:" + mprogress, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Brush Size:" + mprogress, Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Color picker
+        colorbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                colorpick = new CustomDailog(MainActivity.this,doodleid,colorbutton);
+                colorpick.setTitle(R.string.color_picker);
+                colorpick.show();
+
+            }
+        });
+
+
+
 
 
         undobutton.setOnClickListener(new View.OnClickListener() {

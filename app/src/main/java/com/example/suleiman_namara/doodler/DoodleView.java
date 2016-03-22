@@ -23,10 +23,13 @@ public class DoodleView extends View {
     private Paint mpaintDoodle = new Paint();
     private Path mpath;
     private LinkedHashMap<Path,Float> array = new LinkedHashMap<Path,Float>();
+    private LinkedHashMap<Path,Integer> colorarray = new LinkedHashMap<Path,Integer>();
     private ArrayList<Path>paths = new ArrayList<Path>();
    private ArrayList<Path>undo = new ArrayList<Path>();
     private ArrayList<Float>_size = new ArrayList<Float>();
-    float msize;
+    private ArrayList<Integer>_color = new ArrayList<Integer>();
+    private  float msize;
+    private int mcolor;
     public Bitmap bitmap;
 
     public Canvas mCanvas;
@@ -54,7 +57,8 @@ public class DoodleView extends View {
     }
 
     private void init (AttributeSet attrs, int defStyle){
-        mpaintDoodle.setColor(Color.RED);
+       // mpaintDoodle.setColor(Color.RED);
+        mcolor = Color.BLACK;
         mpaintDoodle.setAntiAlias(true);
         mpaintDoodle.setStyle(Paint.Style.STROKE);
         mpath = new Path();
@@ -65,14 +69,23 @@ public class DoodleView extends View {
         msize = size;
     }
 
+    public void mSetColor(int color){
+        mcolor = color;
+    }
+
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-       for(Path _paths: array.keySet()) {
-          mpaintDoodle.setStrokeWidth(array.get(_paths));
+
+       for(Path _paths: array.keySet())
+       {   mpaintDoodle.setColor(colorarray.get(_paths));
+           mpaintDoodle.setStrokeWidth(array.get(_paths));
            canvas.drawPath(_paths,mpaintDoodle);
        }
+        mpaintDoodle.setColor(mcolor);
         mpaintDoodle.setStrokeWidth(msize);
+
         canvas.drawPath(mpath, mpaintDoodle);
     }
 
@@ -92,6 +105,7 @@ public class DoodleView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 array.put(mpath, msize);
+                colorarray.put(mpath,mcolor);
                 mpath = new Path();
                 break;
         }
@@ -125,9 +139,9 @@ public class DoodleView extends View {
     }
 
     public void Redo() {
-        if(undo.size()>0) {
+        if(undo.size() > 0) {
 
-            array.put(undo.get(undo.size()-1),_size.get(_size.size() - 1));
+            array.put(undo.get(undo.size() - 1),_size.get(_size.size() - 1));
             undo.remove(undo.size()-1);
             _size.remove(_size.size()-1);
             invalidate();
