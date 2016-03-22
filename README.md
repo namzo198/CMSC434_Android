@@ -11,13 +11,21 @@ Traverse to app/src/main/java/com/example/suleiman_namara/doodler/MainActvivity 
 After compiling on an emulator/ android device the doodler application will open.
 
 The application is made up of a canvas space for doodling out. 
+
 A seek bar below the canvas to select a BRUSH SIZE.
+
 4 action buttons below the seek bar.
+
 The default doodle color is red and brush size is 1.
+
 The buttons on click perform the following actions:
+   
     1.CLR:- Leads to a color palette where a user is able to choose a color to use and opacity.
+   
     2 UNDO:-Undoes the lines drawn on the canvas.
+   
     3.REDO:_ Redoes the lines drawn on the canvas.
+   
     4.CLEAR:-Clears the canvas.
 
 Start doodling and have fun while at it.
