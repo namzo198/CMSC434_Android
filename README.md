@@ -20,7 +20,7 @@ The default doodle color is red and brush size is 1.
 
 The buttons on click perform the following actions:
    
-    1.CLR:- Leads to a color palette(1) where a user is able to choose a color to use and opacity.
+    1.CLR:- Leads to a color palette[1] where a user is able to choose a color to use and opacity.
    
     2.UNDO:-Undoes the lines drawn on the canvas.
    
