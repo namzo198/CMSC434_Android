@@ -35,4 +35,4 @@ REFERENCES.
 1. Lobsterpicker,This library is written and developed by Lars Werkman,https://android-arsenal.com/details/1/2683
 
 #Intro to HCI Course
-This code developed for my Introduction to Human-Computer Interaction class assignment at the University of Maryland: https://cmsc434-s16.wikispaces.com/IA07+Android+1
+This code was developed for my Introduction to Human-Computer Interaction class assignment at the University of Maryland: https://cmsc434-s16.wikispaces.com/IA07+Android+1
